@@ -25,13 +25,47 @@ const (
 	successStr = `{"responseStatus":{"success":true}}`
 )
 
+// 详情查询条件
 type QueryParams struct {
 	Query     string                 `json:"query"`
 	Operation string                 `json:"operation"`
 	Variables map[string]interface{} `json:"variables"`
 }
 
+// 列表的查询条件
+type QueryListParams struct {
+	QueryParams
+	EntityName string `json:"entityName"`
+	PageSize   int64  `json:"pageSize"`
+	PageLimit  int64  `json:"pageLimit"`
+}
+
 var Schema graphql.Schema
+
+func graphqlListHander(w http.ResponseWriter, r *http.Request) {
+
+	data, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	var queryPrams QueryParams
+	err = json.Unmarshal(data, &queryPrams)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	result := graphql.Do(graphql.Params{
+		Schema:         Schema,
+		RequestString:  queryPrams.Query,
+		VariableValues: queryPrams.Variables,
+		OperationName:  queryPrams.Operation,
+	})
+
+	json.NewEncoder(w).Encode(result)
+}
 
 func graphqlHander(w http.ResponseWriter, r *http.Request) {
 
@@ -61,7 +95,7 @@ func graphqlHander(w http.ResponseWriter, r *http.Request) {
 func NewRouter(schema graphql.Schema) *mux.Router {
 	Schema = schema
 	r := mux.NewRouter().PathPrefix("/v1").Subrouter()
-	// r.HandleFunc("/graphql/list", graphqlHander).Methods(http.MethodPost)
+	r.HandleFunc("/graphql/list", graphqlListHander).Methods(http.MethodPost)
 	r.HandleFunc("/graphql", graphqlHander).Methods(http.MethodPost)
 
 	return r
