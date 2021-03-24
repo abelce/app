@@ -1,0 +1,49 @@
+{
+    "name": "Product",
+    "title": "产品",
+    "type": "record",
+    "fields": [
+        {
+            "name": "id",
+            "title": "产品ID",
+            "type": "string",
+            "primary": true,
+            "valid": "required"
+        },
+        {
+            "name": "name",
+            "title": "产品名称",
+            "type": "string",
+            "valid": "required"
+        },
+        {
+            "name": "categoryId",
+            "title": "产品类型",
+            "type": "string",
+            "referInfo": {
+                "referEntityName": "Category"
+            },
+            "valid": "required"
+        },
+        {
+            "name": "isDeleted",
+            "title": "是否删除",
+            "type": "bool"
+        },
+        {
+            "name": "updatedTime",
+            "title": "更新时间",
+            "type": "int64"
+        },
+        {
+            "name": "createdTime",
+            "title": "创建时间",
+            "type": "int64"
+        },
+        {
+            "name": "operateID",
+            "title": "用户ID",
+            "type": "string"
+        }
+    ]
+}

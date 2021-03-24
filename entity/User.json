@@ -1,0 +1,42 @@
+
+{
+    "name": "User",
+    "title": "用户",
+    "type": "record",
+    "fields": [
+        {
+            "name": "id",
+            "title": "用户ID",
+            "type": "string",
+            "primary": true,
+            "valid": "required"
+        },
+        {
+            "name": "name",
+            "title": "姓名",
+            "type": "string",
+            "valid": "required"
+        },
+        {
+            "name": "sex",
+            "title": "性别",
+            "type": "string",
+            "valid": "required"
+        },
+        {
+            "name": "isDeleted",
+            "title": "是否删除",
+            "type": "bool"
+        },
+        {
+            "name": "updatedTime",
+            "title": "更新时间",
+            "type": "int64"
+        },
+        {
+            "name": "createdTime",
+            "title": "创建时间",
+            "type": "int64"
+        }
+    ]
+}

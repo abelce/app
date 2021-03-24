@@ -1,0 +1,9 @@
+{
+    "port": 3060,
+    "productTableName": "tbl_products",
+    "db": {
+        "driverName": "postgres",
+        "dataSourceName": "host=148.70.144.210 port=65434 user=postgres password=123456 dbname=productdb sslmode=disable"
+    },
+    "gatewayEndpoint": "http://api.vwood.xyz"
+}
