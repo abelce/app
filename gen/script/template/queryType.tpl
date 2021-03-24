@@ -7,7 +7,7 @@ import (
 
 {{$entityName := .Name}}
 var {{$entityName}}Type = graphql.NewObject(graphql.ObjectConfig{
-	Name: "Product",
+	Name: "{{$entityName}}",
 	Fields: graphql.Fields{
         {{range $i, $field := .Fields}}
 		"{{$field.Name}}": &graphql.Field{

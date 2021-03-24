@@ -16,4 +16,8 @@ const (
   F_Product_createdTime = "createdTime"
   //用户ID
   F_Product_operateID = "operateID"
+  //概览
+  F_Product_overview = "overview"
+  //概览
+  F_Product_logo = "logo"
 )

@@ -22,6 +22,10 @@ type Product struct {
   CreatedTime int64 `json:"createdTime"`
   //用户ID
   OperateID string `json:"operateID"`
+  //概览
+  Overview string `json:"overview"`
+  //概览
+  Logo string `json:"logo"`
 }
 
 func (entity *Product) Valid() error {
@@ -40,6 +44,8 @@ func NewProduct(
   updatedTime int64,
   createdTime int64,
   operateID string,
+  overview string,
+  logo string,
 	) (*Product, error) {
 	entity := &Product {
 		   Id: id,
@@ -47,7 +53,9 @@ func NewProduct(
   CategoryId: categoryId,
   UpdatedTime: updatedTime,
   CreatedTime: createdTime,
-  OperateID: operateID, 
+  OperateID: operateID,
+  Overview: overview,
+  Logo: logo, 
 		}
 
     entity.IsDeleted = true
@@ -73,6 +81,8 @@ func (entity *Product) Update(
   updatedTime int64,
   createdTime int64,
   operateID string,
+  overview string,
+  logo string,
 ) error {
 	  entity.Name=name
   entity.CategoryId=categoryId
@@ -80,6 +90,8 @@ func (entity *Product) Update(
   entity.UpdatedTime=updatedTime
   entity.CreatedTime=createdTime
   entity.OperateID=operateID
+  entity.Overview=overview
+  entity.Logo=logo
 
 	entity.UpdatedTime = time.Now().Unix()
 

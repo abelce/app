@@ -2,6 +2,9 @@ package cmds
 
 import (
 	"vwood/app/graphql/application"
+	"vwood/app/graphql/application/queryType"
+
+	"github.com/graphql-go/graphql"
 
 	"github.com/gorilla/handlers"
 	"github.com/urfave/cli"
@@ -30,18 +33,31 @@ func Serve(c *cli.Context) {
 		panic(err)
 	}
 
-	routeHandler := handlers.CombinedLoggingHandler(os.Stdout, application.NewRouter())
+	schema := initSchema()
+	routeHandler := handlers.CombinedLoggingHandler(os.Stdout, application.NewRouter(schema))
 	routeHandler = &contentTypeMiddleware{
 		next: routeHandler,
 	}
 
 	port := int(application.ApplicationContext.GetConfig().Port)
 	if port == 0 {
-		port = 3064
+		port = 3060
 	}
 	log.Printf("start comment service on %d\n", port)
 	err = http.ListenAndServe(":"+strconv.Itoa(port), routeHandler)
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+// 初始化schema
+func initSchema() graphql.Schema {
+	schema, err := graphql.NewSchema(graphql.SchemaConfig{
+		Query: queryType.GetRootQueryType(application.ApplicationContext.GatewayEndpoint()),
+		// Mutation: MutationType,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	return schema
 }

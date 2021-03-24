@@ -44,6 +44,17 @@
             "name": "operateID",
             "title": "用户ID",
             "type": "string"
+        },
+        {
+            "name": "overview",
+            "title": "概览",
+            "type": "string"
+        },
+        {
+            "name": "logo",
+            "title": "概览",
+            "type": "string"
         }
+        
     ]
 }

@@ -13,7 +13,7 @@ const (
 	EntityPath  = "../entity"
 	CodeGenPath = "../common/code-gen"
 	ModelPath   = "../common/model"
-	GqlPath     = "../graphql"
+	GqlPath     = "../graphql/application"
 )
 
 // 删除制定目录下的所有文件
@@ -144,4 +144,13 @@ func RenderTemplate(templateName string, tplPath string, data interface{}, funcM
 		panic(err)
 	}
 	return buf.String()
+}
+
+func LowerCase(name string) string {
+	if name == "" {
+		panic("name is can not nil")
+	}
+	capture := string([]byte(name)[:1]) // 这里不考虑中文的空间不止一个字节的问题， name通常都是中文
+	others := string([]byte(name)[1:])
+	return strings.ToLower(capture) + others
 }

@@ -12,9 +12,9 @@ func GetRootQueryType(endpoint string) *graphql.Object {
 	return graphql.NewObject(graphql.ObjectConfig{
 		Name: "RootQuery",
 		Fields: graphql.Fields{
-			{{range $i, $entity := .Entities}}
-			"{{$entity.Name}}": &graphql.Field{
-				Type: {{$entity.Name}}Type,
+			
+			"Product": &graphql.Field{
+				Type: ProductType,
 				Args: graphql.FieldConfigArgument{
 					"id": &graphql.ArgumentConfig{
 						Type:         graphql.String,
@@ -25,7 +25,7 @@ func GetRootQueryType(endpoint string) *graphql.Object {
 					// 请求转发到具体的服务，并获取数据
 					if id, ok := p.Args["id"].(string); ok && id != "" {
 						req := request.Request{
-							Url: endpoint + "/v1/{{lowerCase $entity.Name}}s/" + id,
+							Url: endpoint + "/v1/products/" + id,
 							Method: "GET",
 						}
 						result, err := req.Do()
@@ -41,7 +41,37 @@ func GetRootQueryType(endpoint string) *graphql.Object {
 					return nil, nil
 				},
 			},
-			{{end}}
+			
+			"User": &graphql.Field{
+				Type: UserType,
+				Args: graphql.FieldConfigArgument{
+					"id": &graphql.ArgumentConfig{
+						Type:         graphql.String,
+						DefaultValue: "",
+					},
+				},
+				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+					// 请求转发到具体的服务，并获取数据
+					if id, ok := p.Args["id"].(string); ok && id != "" {
+						req := request.Request{
+							Url: endpoint + "/v1/users/" + id,
+							Method: "GET",
+						}
+						result, err := req.Do()
+						if err != nil {
+							return nil, err
+						}
+						var entity gen_md.Product
+						json.Unmarshal(result, &entity)
+						
+						return entity, nil	
+					}
+
+					return nil, nil
+				},
+			},
+			
 		},
 	})
 }
+

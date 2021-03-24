@@ -87,5 +87,27 @@ var ProductType = graphql.NewObject(graphql.ObjectConfig{
 			},
 		},
         
+		"overview": &graphql.Field{
+			Type: graphql.String,
+			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+				if p.Source == nil {
+					return nil, nil
+				}
+				entity := p.Source.(gen_md.Product)
+                return entity.Overview, nil
+			},
+		},
+        
+		"logo": &graphql.Field{
+			Type: graphql.String,
+			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+				if p.Source == nil {
+					return nil, nil
+				}
+				entity := p.Source.(gen_md.Product)
+                return entity.Logo, nil
+			},
+		},
+        
 	},
 })

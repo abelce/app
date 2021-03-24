@@ -10,7 +10,7 @@ type Context struct {
 	config   *Config
 	pgClient *sql.DB
 
-	service *Service
+	// service *Service
 	// productRepository   model.ProductRepository
 	// productQueryService *ProductQueryService
 }
@@ -36,6 +36,10 @@ func NewContext(cfgPath string) (*Context, error) {
 
 func (c *Context) GetConfig() *Config {
 	return c.config
+}
+
+func (c *Context) GatewayEndpoint() string {
+	return c.config.GatewayEndpoint
 }
 
 func (c *Context) PgClient() (*sql.DB, error) {

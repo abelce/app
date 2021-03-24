@@ -1,0 +1,1 @@
++ 通过业务对象的配置文件(entity)，自动生成业务对象、对象的属性常量、graphql的queryType

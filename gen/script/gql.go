@@ -67,6 +67,8 @@ func GenerateRootGql(gqlPath string, entities []*Entity) {
 	}
 
 	var funcMaps []template.FuncMap
+	funcMaps = append(funcMaps, template.FuncMap{"lowerCase": LowerCase})
+
 	result := RenderTemplate("rootQueryType.tpl", path, rt, funcMaps)
 	MkdirAll(gqlPath + "/" + queryTypePath)
 	err = WriteFile(gqlPath+"/"+queryTypePath+"/rootQueryType.go", result)

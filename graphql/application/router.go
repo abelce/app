@@ -1,11 +1,20 @@
+/*
+ * File: router.go
+ * Project: application
+ * File Created: Wednesday, 24th March 2021 1:51:31 pm
+ * Author: zxtang (1061225829@qq.com)
+ * -----
+ * Last Modified: Wednesday, 24th March 2021 1:51:34 pm
+ * Modified By: zxtang (1061225829@qq.com>)
+ * -----
+ * Copyright 2017 - 2021 Your Company, Your Company
+ */
 package application
 
 import (
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
-	"vwood/app/graphql/queryType"
 
 	"github.com/gorilla/mux"
 	"github.com/graphql-go/graphql"
@@ -23,17 +32,6 @@ type QueryParams struct {
 }
 
 var Schema graphql.Schema
-
-func init() {
-	schema, err := graphql.NewSchema(graphql.SchemaConfig{
-		Query: queryType.RootQueryType,
-		// Mutation: MutationType,
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	Schema = schema
-}
 
 func graphqlHander(w http.ResponseWriter, r *http.Request) {
 
@@ -60,8 +58,9 @@ func graphqlHander(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(result)
 }
 
-func NewRouter() *mux.Router {
-	r := mux.NewRouter().PathPrefix("/" + version).Subrouter()
+func NewRouter(schema graphql.Schema) *mux.Router {
+	Schema = schema
+	r := mux.NewRouter().PathPrefix("/v1").Subrouter()
 	// r.HandleFunc("/graphql/list", graphqlHander).Methods(http.MethodPost)
 	r.HandleFunc("/graphql", graphqlHander).Methods(http.MethodPost)
 

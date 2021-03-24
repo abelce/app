@@ -57,4 +57,4 @@ func (r *Request) Do() ([]byte, error) {
 	}
 
 	return result, nil
-} 
+}
