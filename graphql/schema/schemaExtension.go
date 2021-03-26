@@ -10,34 +10,34 @@ import (
 type SchemaExtension struct {
 }
 
-func (t *SchemaExtension) Init(ctx context.Context, p *graphql.Params) context.Context {
+func (t SchemaExtension) Init(ctx context.Context, p *graphql.Params) context.Context {
 	return ctx
 }
 
-func (t *SchemaExtension) Name() string {
+func (t SchemaExtension) Name() string {
 	return "SchemaExtension"
 }
 
-func (t *SchemaExtension) HasResult() bool {
+func (t SchemaExtension) HasResult() bool {
 	return false
 }
 
-func (t *SchemaExtension) GetResult(ctx context.Context) interface{} {
+func (t SchemaExtension) GetResult(ctx context.Context) interface{} {
 	return nil
 }
 
-func (t *SchemaExtension) ParseDidStart(ctx context.Context) (context.Context, graphql.ParseFinishFunc) {
+func (t SchemaExtension) ParseDidStart(ctx context.Context) (context.Context, graphql.ParseFinishFunc) {
 	return ctx, func(err error) {}
 }
 
-func (t *SchemaExtension) ValidationDidStart(ctx context.Context) (context.Context, graphql.ValidationFinishFunc) {
+func (t SchemaExtension) ValidationDidStart(ctx context.Context) (context.Context, graphql.ValidationFinishFunc) {
 	return ctx, func(errs []gqlerrors.FormattedError) {}
 }
 
-func (t *SchemaExtension) ExecutionDidStart(ctx context.Context) (context.Context, graphql.ExecutionFinishFunc) {
+func (t SchemaExtension) ExecutionDidStart(ctx context.Context) (context.Context, graphql.ExecutionFinishFunc) {
 	return ctx, func(*graphql.Result) {}
 }
 
-func (t *SchemaExtension) ResolveFieldDidStart(ctx context.Context, i *graphql.ResolveInfo) (context.Context, graphql.ResolveFieldFinishFunc) {
+func (t SchemaExtension) ResolveFieldDidStart(ctx context.Context, i *graphql.ResolveInfo) (context.Context, graphql.ResolveFieldFinishFunc) {
 	return ctx, func(v interface{}, err error) {}
 }

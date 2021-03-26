@@ -14,7 +14,7 @@ func GetSchema() graphql.Schema {
 	schema, err := graphql.NewSchema(graphql.SchemaConfig{
 		Query: queryType.GetRootQueryType(application.ApplicationContext.GatewayEndpoint()),
 		// Mutation: MutationType,
-		// Extensions: GetExtensions(),
+		Extensions: GetExtensions(),
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -22,9 +22,9 @@ func GetSchema() graphql.Schema {
 	return schema
 }
 
-// func GetExtensions() []graphql.Extension {
-// 	var extensions []graphql.Extension
-// 	extensions = append(extensions, SchemaExtension{})
+func GetExtensions() []graphql.Extension {
+	var extensions []graphql.Extension
+	extensions = append(extensions, SchemaExtension{})
 
-// 	return extensions
-// }
+	return extensions
+}
