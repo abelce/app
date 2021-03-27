@@ -1,4 +1,4 @@
-package script
+package model
 
 type ReferInfo struct {
 	ReferEntityName string `json:"referEntityName"`

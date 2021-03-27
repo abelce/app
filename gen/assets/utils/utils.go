@@ -1,12 +1,15 @@
-package script
+package utils
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
+	"vwood/app/gen/domain/model"
 )
 
 const (
@@ -154,3 +157,58 @@ func LowerCase(name string) string {
 	others := string([]byte(name)[1:])
 	return strings.ToLower(capture) + others
 }
+
+func getDirPath() (string, error) {
+	path, err := os.Getwd()
+	return path + "/", err
+}
+
+// 从执行目录获取文件的实际路径
+func GetRealPath(path string) string {
+	dirPath, err := getDirPath()
+	if err != nil {
+		panic(err)
+	}
+	realPath, err := filepath.Abs(dirPath + path)
+	if err != nil {
+		panic(err)
+	}
+	return realPath
+}
+
+// 读取文件名称
+func ReadJsonFiles(path string) []string {
+	rd, err := ioutil.ReadDir(path)
+	if err != nil {
+		panic(err)
+	}
+
+	var fileNames []string
+	for _, fi := range rd {
+		if !fi.IsDir() {
+			fileNames = append(fileNames, fi.Name())
+		}
+	}
+
+	return fileNames
+}
+
+// 读取一个文件的内容
+func ReadOneJsonFile(path string) *model.Entity {
+	data, err := ioutil.ReadFile(path)
+	if err != nil {
+		panic(err)
+	}
+
+	entity := &model.Entity{}
+
+	err = json.Unmarshal(data, entity)
+	if err != nil {
+		panic(err)
+	}
+
+	// 判断必须的字段有没有， 没有自动加上
+
+	return entity
+}
+
