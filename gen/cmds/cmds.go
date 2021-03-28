@@ -20,15 +20,19 @@ func Run() {
 	runMainCommand(entites)
 }
 
+// 统一执行所有的命令
 func runMainCommand(entities []*model.Entity) {
 	var mainCommand []command.Command
 	constantCommand := command.NewConstantCommand(utils.GetRealPath(utils.CodeGenPath), entities)
 	modelCommand := command.NewModelCommand(utils.GetRealPath(utils.CodeGenPath), entities)
 	gqlCommand := command.NewGqlCommand(utils.GetRealPath(utils.GqlPath), entities)
+	databaseCommand := command.NewDatabaseCommand(utils.GetRealPath(utils.DatabasePath), entities)
 
 	mainCommand = append(mainCommand, constantCommand)
 	mainCommand = append(mainCommand, modelCommand)
 	mainCommand = append(mainCommand, gqlCommand)
+	// databaseCommand 该命令中的建库脚本、docker.sh脚本、数据库的docker配置可以考虑使用子命令来组合（组合模式）, 暂时在一个脚本集中处理
+	mainCommand = append(mainCommand, databaseCommand)
 
 	for _, command := range mainCommand {
 		command.Execute()

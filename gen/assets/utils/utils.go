@@ -17,6 +17,7 @@ const (
 	CodeGenPath = "../common/code-gen"
 	ModelPath   = "../common/model"
 	GqlPath     = "../graphql/application"
+	DatabasePath = "../common/database"
 )
 
 // 删除制定目录下的所有文件
@@ -177,17 +178,18 @@ func GetRealPath(path string) string {
 }
 
 // 读取文件名称
-func ReadJsonFiles(path string) []string {
-	rd, err := ioutil.ReadDir(path)
+func ReadJsonFiles(dir string) []string {
+	rd, err := ioutil.ReadDir(dir)
 	if err != nil {
 		panic(err)
 	}
 
 	var fileNames []string
 	for _, fi := range rd {
-		if !fi.IsDir() {
+		if !fi.IsDir() && strings.HasSuffix(fi.Name(), ".json") {
 			fileNames = append(fileNames, fi.Name())
 		}
+
 	}
 
 	return fileNames
@@ -211,4 +213,3 @@ func ReadOneJsonFile(path string) *model.Entity {
 
 	return entity
 }
-
