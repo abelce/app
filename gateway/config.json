@@ -1,0 +1,94 @@
+{
+    "sslChainCrtPath": "/go/bin/ssl/server.crt",
+    "sslKeyPath": "/go/bin/ssl/server.key",
+    "apis": [
+        {
+            "key": "users",
+            "scheme": "http",
+            "host": "127.0.0.1:3061",
+            "path": "/"
+        },
+        {
+            "key": "auth",
+            "scheme": "http",
+            "host": "127.0.0.1:3062",
+            "path": "/"
+        },
+        {
+            "key": "operators",
+            "scheme": "http",
+            "host": "127.0.0.1:3062",
+            "path": "/"
+        },
+        {
+            "key": "articles",
+            "scheme": "http",
+            "host": "127.0.0.1:9008",
+            "path": "/"
+        },
+        {
+            "key": "comments",
+            "scheme": "http",
+            "host": "127.0.0.1:9008",
+            "path": "/"
+        }
+    ],
+    "noVerify": {
+        "articles": {
+            "methods": {
+                "get": {
+                    "urls": [
+                        "/v1/articles",
+                        "/v1/articles/list"
+                    ],
+                    "regs": [
+                        "^\/v1\/articles\/[a-z0-9-]+$"
+                    ],
+                    "all": true
+                }
+            }
+        },
+        "auth": {
+            "methods": {
+                "post": {
+                    "urls": [
+                        "/v1/auth"
+                    ]
+                }
+            }
+        },
+        "registry": {
+            "methods": {
+                "post": {
+                    "urls": [
+                        "/v1/registry"
+                    ]
+                }
+            }
+        },
+        "comment": {
+            "methods": {
+                "get": {
+                    "urls": [
+                        "/v1/comment",
+                        "/v1/comment/list"
+                    ]
+                },
+                "post":{
+                    "all": true
+                }
+            }
+        },
+        "operators": {
+            "methods": {
+                "get": {
+                    "urls": [
+                        "/v1/operators/info",
+                        "/v1/operators",
+                        "/v1/operators/github/callback"
+                    ]
+                }
+            }
+        }
+    }
+}
