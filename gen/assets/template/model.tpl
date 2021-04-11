@@ -27,7 +27,7 @@ func New{{.Name}}(
 		 {{getCreateFuncBody .}} 
 		}
 
-    entity.IsDeleted = true
+    entity.IsDeleted = false
     entity.CreatedTime = time.Now().Unix()
 	entity.UpdatedTime = time.Now().Unix()
 	
@@ -39,7 +39,7 @@ func New{{.Name}}(
 }
 
 func (entity *{{.Name}}) Delete() {
-	entity.IsDeleted = true
+	entity.IsDeleted = false
 	entity.UpdatedTime = time.Now().Unix()
 }
 

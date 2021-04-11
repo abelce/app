@@ -1,11 +1,11 @@
 package command
 
 import (
+	"app/gen/assets/utils"
+	"app/gen/domain/model"
 	"fmt"
 	"html/template"
 	"path/filepath"
-	"vwood/app/gen/assets/utils"
-	"vwood/app/gen/domain/model"
 )
 
 const (
@@ -57,7 +57,7 @@ func GenerateSql(databaseDir string, entity *model.Entity) {
 
 	entityDatabaseDir := databaseDir + "/" + entity.Name
 	utils.MkdirAll(entityDatabaseDir)
-	err = utils.WriteFile(entityDatabaseDir + "/" + utils.LowerCase(entity.Name) + "db.sql", result)
+	err = utils.WriteFile(entityDatabaseDir+"/"+utils.LowerCase(entity.Name)+"db.sql", result)
 	if err != nil {
 		panic(err)
 	}
@@ -80,7 +80,7 @@ func GenerateDockerfile(databaseDir string, entity *model.Entity) {
 
 	entityDatabaseDir := databaseDir + "/" + entity.Name
 	utils.MkdirAll(entityDatabaseDir)
-	err = utils.WriteFile(entityDatabaseDir + "/" + "Dockerfile", result)
+	err = utils.WriteFile(entityDatabaseDir+"/"+"Dockerfile", result)
 	if err != nil {
 		panic(err)
 	}
@@ -103,10 +103,8 @@ func GenerateDockerSH(databaseDir string, entity *model.Entity) {
 
 	entityDatabaseDir := databaseDir + "/" + entity.Name
 	utils.MkdirAll(entityDatabaseDir)
-	err = utils.WriteFile(entityDatabaseDir + "/" + "docker.sh", result)
+	err = utils.WriteFile(entityDatabaseDir+"/"+"docker.sh", result)
 	if err != nil {
 		panic(err)
 	}
 }
-
-

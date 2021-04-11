@@ -1,9 +1,9 @@
 package cmds
 
 import (
-	"vwood/app/gen/assets/utils"
-	"vwood/app/gen/command"
-	"vwood/app/gen/domain/model"
+	"app/gen/assets/utils"
+	"app/gen/command"
+	"app/gen/domain/model"
 )
 
 func Run() {
@@ -22,6 +22,6 @@ func Run() {
 
 // 统一执行所有的命令
 func runMainCommand(entities []*model.Entity) {
- 	mainCommand := command.NewMainCommand(entities)
+	mainCommand := command.NewMainCommand(entities)
 	mainCommand.Execute()
 }

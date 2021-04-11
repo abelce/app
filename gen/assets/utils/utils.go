@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"app/gen/domain/model"
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -9,14 +10,13 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	"vwood/app/gen/domain/model"
 )
 
 const (
-	EntityPath  = "../entity"
-	CodeGenPath = "../common/code-gen"
-	ModelPath   = "../common/model"
-	GqlPath     = "../graphql/application"
+	EntityPath   = "../entity"
+	CodeGenPath  = "../common/code-gen"
+	ModelPath    = "../common/model"
+	GqlPath      = "../graphql/application"
 	DatabasePath = "../common/database"
 )
 

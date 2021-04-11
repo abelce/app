@@ -1,9 +1,9 @@
 package main
 
 import (
+	"app/graphql/cmds"
 	"fmt"
 	"os"
-	"vwood/app/graphql/cmds"
 	// _ "github.com/lib/pq"
 )
 

@@ -1,6 +1,6 @@
 package main
 
-import "vwood/app/gen/cmds"
+import "app/gen/cmds"
 
 func main() {
 	cmds.Run()

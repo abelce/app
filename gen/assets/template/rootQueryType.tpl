@@ -1,8 +1,8 @@
 package queryType
 
 import (
-	gen_md "vwood/app/common/code-gen/models"
-	"vwood/app/common/request"
+	gen_md "app/common/code-gen/models"
+	"app/common/request"
 
 	"github.com/graphql-go/graphql"
 	"encoding/json"

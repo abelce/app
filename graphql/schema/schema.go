@@ -1,9 +1,9 @@
 package schema
 
 import (
+	"app/graphql/application"
+	"app/graphql/application/queryType"
 	"log"
-	"vwood/app/graphql/application"
-	"vwood/app/graphql/application/queryType"
 
 	"github.com/graphql-go/graphql"
 )

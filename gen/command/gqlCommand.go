@@ -1,11 +1,11 @@
 package command
 
 import (
+	"app/gen/assets/utils"
+	"app/gen/domain/model"
 	"fmt"
 	"html/template"
 	"path/filepath"
-	"vwood/app/gen/assets/utils"
-	"vwood/app/gen/domain/model"
 )
 
 const (
@@ -26,15 +26,15 @@ func NewGqlCommand(basePath string, entities []*model.Entity) GqlCommand {
 
 func (t GqlCommand) Execute() {
 	//for _, entity := range t.Entities {
-		fmt.Println("[generate graphql-------------------]")
-		GenerateGql(t.BasePath, t.Entities)
+	fmt.Println("[generate graphql-------------------]")
+	GenerateGql(t.BasePath, t.Entities)
 	//}
 }
+
 func (t GqlCommand) Add(cm Command) {}
 
 func GenerateGql(gqlPath string, entities []*model.Entity) {
 
-	// 通过模版来渲染，字符串不好拼接代码
 	path, err := filepath.Abs("./assets/template/queryType.tpl")
 	if err != nil {
 		panic(err)

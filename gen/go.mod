@@ -1,3 +1,3 @@
-module vwood/app/gen
+module app/gen
 
 go 1.14

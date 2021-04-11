@@ -46,7 +46,7 @@ func NewUser(
   CreatedTime: createdTime, 
 		}
 
-    entity.IsDeleted = true
+    entity.IsDeleted = false
     entity.CreatedTime = time.Now().Unix()
 	entity.UpdatedTime = time.Now().Unix()
 	
@@ -58,7 +58,7 @@ func NewUser(
 }
 
 func (entity *User) Delete() {
-	entity.IsDeleted = true
+	entity.IsDeleted = false
 	entity.UpdatedTime = time.Now().Unix()
 }
 

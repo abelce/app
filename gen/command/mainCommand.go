@@ -1,13 +1,14 @@
 package command
 
 import (
-	"vwood/app/gen/assets/utils"
-	"vwood/app/gen/domain/model"
+	"app/gen/assets/utils"
+	"app/gen/domain/model"
+	"fmt"
 )
 
 type MainCommand struct {
-	Entities []*model.Entity
-	CommandList []Command
+	Entities    []*model.Entity
+	//CommandList []Command
 }
 
 func NewMainCommand(entities []*model.Entity) MainCommand {
@@ -17,19 +18,53 @@ func NewMainCommand(entities []*model.Entity) MainCommand {
 }
 
 func (t MainCommand) Execute() {
-	constantCommand := NewConstantCommand(utils.GetRealPath(utils.CodeGenPath), t.Entities)
-	modelCommand := NewModelCommand(utils.GetRealPath(utils.CodeGenPath), t.Entities)
-	gqlCommand := NewGqlCommand(utils.GetRealPath(utils.GqlPath), t.Entities)
-	databaseCommand := NewDatabaseCommand(utils.GetRealPath(utils.DatabasePath), t.Entities)
+	t.ExecuteRecord()
+	t.ExecuteEnums()
+}
+func (t MainCommand) Add(cm Command) {}
 
-	t.CommandList = append(t.CommandList, constantCommand)
-	t.CommandList = append(t.CommandList, modelCommand)
-	t.CommandList = append(t.CommandList, gqlCommand)
+// 实体
+func (t MainCommand) ExecuteRecord() {
+	var entities []*model.Entity
+	for _, entity := range t.Entities {
+		if entity.Type == "record" {
+			entities = append(entities, entity)
+		}
+	}
+
+	constantCommand := NewConstantCommand(utils.GetRealPath(utils.CodeGenPath), entities)
+	modelCommand := NewModelCommand(utils.GetRealPath(utils.CodeGenPath), entities)
+	gqlCommand := NewGqlCommand(utils.GetRealPath(utils.GqlPath), entities)
+	databaseCommand := NewDatabaseCommand(utils.GetRealPath(utils.DatabasePath), entities)
+
+	var CommandList []Command
+	CommandList = append(CommandList, constantCommand)
+	CommandList = append(CommandList, modelCommand)
+	CommandList = append(CommandList, gqlCommand)
 	// databaseCommand 该命令中的建库脚本、docker.sh脚本、数据库的docker配置可以考虑使用子命令来组合（组合模式）, 暂时在一个脚本集中处理
-	t.CommandList = append(t.CommandList, databaseCommand)
+	CommandList = append(CommandList, databaseCommand)
 
-	for _, cmd := range t.CommandList {
+	for _, cmd := range CommandList {
 		cmd.Execute()
 	}
 }
-func (t MainCommand) Add(cm Command) {}
+
+// 枚举
+func (t MainCommand) ExecuteEnums() {
+	var entities []*model.Entity
+	for _, entity := range t.Entities {
+		if entity.Type == "enum" {
+			entities = append(entities, entity)
+		}
+	}
+	fmt.Println(len(entities))
+
+	enumCommand := NewEnumCommand(utils.GetRealPath(utils.CodeGenPath), entities)
+
+	var CommandList []Command
+	CommandList = append(CommandList, enumCommand)
+
+	for _, cmd := range CommandList {
+		cmd.Execute()
+	}
+}

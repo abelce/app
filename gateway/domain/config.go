@@ -1,4 +1,4 @@
-package application
+package domain
 
 import (
 	"fmt"
@@ -25,6 +25,7 @@ type APIContext struct {
 }
 
 type Config struct {
+	Version         string
 	SSLChainCrtPath string
 	SSLKeyPath      string
 	APIs            []*APIContext

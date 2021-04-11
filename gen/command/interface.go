@@ -1,6 +1,6 @@
 package command
 
-import "vwood/app/gen/domain/model"
+import "app/gen/domain/model"
 
 type Command interface {
 	Add(Command)

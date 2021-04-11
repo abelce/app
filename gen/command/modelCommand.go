@@ -1,13 +1,13 @@
 package command
 
 import (
+	"app/gen/assets/utils"
+	"app/gen/domain/model"
 	"bytes"
 	"fmt"
 	"html/template"
 	"path/filepath"
 	"strings"
-	"vwood/app/gen/assets/utils"
-	"vwood/app/gen/domain/model"
 )
 
 const (
@@ -155,8 +155,7 @@ func renderTemplate(tplPath string, entity *model.Entity) string {
 
 func getCreateFuncParams(entity *model.Entity) string {
 	var result []string
-	var excludeFields []string
-	excludeFields = []string{"isDeleted", "createdTime", "updatedTime"}
+	var excludeFields = []string{"isDeleted", "createdTime", "updatedTime"}
 	for _, field := range entity.Fields {
 		if !utils.IsIncludeItem(excludeFields, field.Name) {
 			result = append(result, "  "+field.Name+" "+field.Type+",")
@@ -167,8 +166,7 @@ func getCreateFuncParams(entity *model.Entity) string {
 
 func getCreateFuncBody(entity *model.Entity) string {
 	var result []string
-	var excludeFields []string
-	excludeFields = []string{"isDeleted", "createdTime", "updatedTime"}
+	var excludeFields = []string{"isDeleted", "createdTime", "updatedTime"}
 	for _, field := range entity.Fields {
 		if !utils.IsIncludeItem(excludeFields, field.Name) {
 			result = append(result, "  "+proccessFieldName(field.Name)+": "+field.Name+",")
@@ -179,8 +177,7 @@ func getCreateFuncBody(entity *model.Entity) string {
 
 func getUpdateParams(entity *model.Entity) string {
 	var result []string
-	var excludeFields []string
-	excludeFields = []string{"id", "isDeleted", "createdTime", "updatedTime", "operateID"}
+	var excludeFields = []string{"id", "isDeleted", "createdTime", "updatedTime", "operateID"}
 
 	for _, field := range entity.Fields {
 		if !utils.IsIncludeItem(excludeFields, field.Name) {
@@ -192,8 +189,7 @@ func getUpdateParams(entity *model.Entity) string {
 
 func getUpdateBody(entity *model.Entity) string {
 	var result []string
-	var excludeFields []string
-	excludeFields = []string{"id", "isDeleted", "createdTime", "updatedTime", "operateID"}
+	var excludeFields = []string{"id", "isDeleted", "createdTime", "updatedTime", "operateID"}
 
 	for _, field := range entity.Fields {
 		if !utils.IsIncludeItem(excludeFields, field.Name) {
@@ -203,4 +199,3 @@ func getUpdateBody(entity *model.Entity) string {
 
 	return strings.Join(result, "\n")
 }
-

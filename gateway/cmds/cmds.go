@@ -1,6 +1,10 @@
 package cmds
 
-import "github.com/urfave/cli"
+import (
+	"fmt"
+
+	"github.com/urfave/cli"
+)
 
 //NewCliApp 创建命令行程序
 func NewCliApp() *cli.App {
@@ -28,11 +32,14 @@ func NewCliApp() *cli.App {
 					Usage: "开启80端口，内网调用端口",
 				},
 				cli.BoolFlag{
-					Name:  "8443",
-					Usage: "开启8443端口，外网调用端口",
+					Name:  "443",
+					Usage: "开启443端口，外网调用端口",
 				},
 			},
 		},
+	}
+	app.CommandNotFound = func(context *cli.Context, s string) {
+		fmt.Println("command not found!!!")
 	}
 
 	return app

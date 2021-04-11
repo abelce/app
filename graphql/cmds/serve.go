@@ -1,8 +1,8 @@
 package cmds
 
 import (
-	"vwood/app/graphql/application"
-	"vwood/app/graphql/schema"
+	"app/graphql/application"
+	"app/graphql/schema"
 
 	"github.com/gorilla/handlers"
 	"github.com/urfave/cli"

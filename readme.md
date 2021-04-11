@@ -13,3 +13,8 @@
     + graphql: gql查询项目，所有gql查询都使用该项目统一处理，从这里发送请求到具体的业务模块
     + gateway: 网关
     + devenv: docker-compose管理模块
+
++ gateway
+    + 启动命令
+        + go run main.go seve -80
+        + go run main.go seve -443

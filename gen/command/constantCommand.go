@@ -1,10 +1,10 @@
 package command
 
 import (
+	"app/gen/assets/utils"
+	"app/gen/domain/model"
 	"fmt"
 	"strings"
-	"vwood/app/gen/assets/utils"
-	"vwood/app/gen/domain/model"
 )
 
 const (

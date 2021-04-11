@@ -1,13 +1,15 @@
 package cmds
 
 import (
+	"abelce/app/gateway/application"
+	"abelce/app/gateway/domain"
 	"compress/gzip"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
-	"vwood/app/gateway/application"
 
 	"github.com/gorilla/handlers"
 	"github.com/urfave/cli"
@@ -15,12 +17,13 @@ import (
 
 func serve(c *cli.Context) {
 	configPath := c.Parent().String("config")
+	fmt.Println(configPath)
 	data, err := ioutil.ReadFile(configPath)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	cfg := new(application.Config)
+	cfg := new(domain.Config)
 	err = json.Unmarshal(data, cfg)
 	if err != nil {
 		log.Fatal(err)
@@ -37,7 +40,7 @@ func serve(c *cli.Context) {
 			panic(err)
 		}
 		break
-	case c.Bool("8443"):
+	case c.Bool("443"):
 		println("start server on :443")
 		router := wrapRouter(application.ApplicationContext.Router443())
 		// 暂时不用key

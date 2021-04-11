@@ -58,7 +58,7 @@ func NewProduct(
   Logo: logo, 
 		}
 
-    entity.IsDeleted = true
+    entity.IsDeleted = false
     entity.CreatedTime = time.Now().Unix()
 	entity.UpdatedTime = time.Now().Unix()
 	
@@ -70,7 +70,7 @@ func NewProduct(
 }
 
 func (entity *Product) Delete() {
-	entity.IsDeleted = true
+	entity.IsDeleted = false
 	entity.UpdatedTime = time.Now().Unix()
 }
 

@@ -1,4 +1,5 @@
 {
+    "version": "v1",
     "sslChainCrtPath": "/go/bin/ssl/server.crt",
     "sslKeyPath": "/go/bin/ssl/server.key",
     "apis": [

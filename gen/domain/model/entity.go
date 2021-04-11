@@ -17,11 +17,13 @@ type Field struct {
 	SourceInfo *SourceInfo `json:"sourceInfo"`
 	Type       string      `json:"type"`
 	Valid      string      `json:"valid"`
+	Value      interface{} `json:"value"`
 }
 
 type Entity struct {
-	Name   string  `json:"name"`
-	Title  string  `json:"title"`
-	Fields []Field `json:"fields"`
-	Type   string  `json:"type"`
+	Name        string  `json:"name"`
+	Title       string  `json:"title"`
+	Fields      []Field `json:"fields"`
+	Type        string  `json:"type"`
+	Description string  `json:"Description"` // 描述文字
 }

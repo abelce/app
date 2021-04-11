@@ -1,4 +1,4 @@
-module vwood/app/common
+module app/common
 
 go 1.14
 
