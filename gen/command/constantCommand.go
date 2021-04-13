@@ -1,8 +1,8 @@
 package command
 
 import (
-	"app/gen/assets/utils"
-	"app/gen/domain/model"
+	"abelce/app/gen/assets/utils"
+	"abelce/app/gen/domain/model"
 	"fmt"
 	"strings"
 )

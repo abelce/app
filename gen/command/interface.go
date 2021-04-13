@@ -1,6 +1,6 @@
 package command
 
-import "app/gen/domain/model"
+import "abelce/app/gen/domain/model"
 
 type Command interface {
 	Add(Command)

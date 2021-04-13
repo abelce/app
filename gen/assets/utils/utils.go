@@ -16,7 +16,7 @@ const (
 	EntityPath   = "../entity"
 	CodeGenPath  = "../common/code-gen"
 	ModelPath    = "../common/model"
-	GqlPath      = "../graphql/application"
+	GqlPath      = "../common/queryType"
 	DatabasePath = "../common/database"
 )
 

@@ -1,8 +1,8 @@
 package queryType
 
 import (
-	gen_md "app/common/code-gen/models"
-	"app/common/request"
+	gen_md "abelce/app/common/code-gen/models"
+	"abelce/app/common/request"
 
 	"github.com/graphql-go/graphql"
 	"encoding/json"
@@ -44,7 +44,7 @@ func GetRootQueryType(endpoint string) *graphql.Object {
 					return nil, nil
 				},
 			},
-			"{{$entity.Name}}-list": &graphql.Field{
+			"{{$entity.Name}}_list": &graphql.Field{
 				Type: graphql.NewList({{$entity.Name}}Type),
 				Args: graphql.FieldConfigArgument{
 					"queryStr": &graphql.ArgumentConfig{

@@ -1,9 +1,0 @@
-{
-    "port": 3060,
-    "productTableName": "tbl_products",
-    "db": {
-        "driverName": "postgres",
-        "dataSourceName": ""
-    },
-    "gatewayEndpoint": "http://127.0.0.1:3066"
-}

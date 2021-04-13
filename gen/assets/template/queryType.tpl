@@ -1,7 +1,7 @@
 package queryType
 
 import (
-	gen_md "app/common/code-gen/models"
+	gen_md "abelce/app/common/code-gen/models"
 	"github.com/graphql-go/graphql"
 )
 

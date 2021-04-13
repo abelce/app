@@ -1,9 +1,9 @@
 package cmds
 
 import (
-	"app/gen/assets/utils"
-	"app/gen/command"
-	"app/gen/domain/model"
+	"abelce/app/gen/assets/utils"
+	"abelce/app/gen/command"
+	"abelce/app/gen/domain/model"
 )
 
 func Run() {
